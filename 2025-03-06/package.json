@@ -1,0 +1,12 @@
+{
+  "name": "my-first-application",
+  "version": "1.0.0",
+  "description": "Small node application",
+  "license": "ISC",
+  "author": "Seven Academy",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
