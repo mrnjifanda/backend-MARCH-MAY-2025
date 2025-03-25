@@ -1,0 +1,13 @@
+
+
+<div class="">
+  <h1>All contacts</h1>
+  <ul>
+    @for (contact of contacts; track $index) {
+      <li><b>{{ contact.name }}</b>: {{ contact.email }}</li>
+    } @empty {
+      <p>Not contact</p>
+    }
+  </ul>
+</div>
+<router-outlet />
