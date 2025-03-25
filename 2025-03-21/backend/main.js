@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/level-4-contact-app')
@@ -7,6 +8,7 @@ mongoose.connect('mongodb://localhost:27017/level-4-contact-app')
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 const contactRoute = require('./routes/contact.route');
