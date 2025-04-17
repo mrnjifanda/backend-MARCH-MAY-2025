@@ -1,5 +1,21 @@
+"use client"
+
+import { getAllUser } from "@/services/user.service";
+import { useEffect, useState } from "react";
 
 export default function AddContact() {
+
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        getAllUser().then(response => {
+            if (response.error) {
+                alert(response.message);
+            } else {
+                setUsers(response.data);
+            }
+        });
+    }, []);
+
     return (
         <main>
             <h1>Add Contact</h1>
@@ -11,8 +27,9 @@ export default function AddContact() {
                 </div>
                 <select>
                     <option>Added by</option>
-                    <option value="User">User</option>
-                    <option value="Admin">Admin</option>
+                    {users.map(user => (
+                        <option key={user._id} value={user._id}>{user.firstName + ' ' + user.lastName}</option>
+                    ))}
                 </select>
 
                 <div>
