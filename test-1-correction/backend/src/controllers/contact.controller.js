@@ -33,6 +33,32 @@ const lists = async (req, res) => {
     }
 };
 
+const getOne = async (req, res) => {
+    try {
+
+        const { id } = req.params;
+
+        const contact = await Contact.findById(id).populate('addedBy');
+        if (contact) {
+            return res.json({
+                error: false,
+                message: 'Contact details',
+                data: contact
+            });
+        }
+
+        return res.status(404).json({
+            error: true,
+            message: 'Contact not found',
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: true,
+            message: 'Internal Server Error'
+        }); 
+    }
+};
+
 const update = async (req, res) => {
     try {
         const id = req.params.id;
@@ -71,4 +97,4 @@ const remove = async (req, res) => {
     }
 };
 
-module.exports = { create, lists, update, remove };
+module.exports = { create, lists, update, remove, getOne };

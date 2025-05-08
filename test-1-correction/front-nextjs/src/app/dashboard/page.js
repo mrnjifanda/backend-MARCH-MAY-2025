@@ -47,8 +47,8 @@ export default function Dashboard() {
                             <td>{contact.email}</td>
                             <td>{contact.addedBy.firstName + ' ' + contact.addedBy.lastName}</td>
                             <td>
-                                <a href="/dashboard/contact/edit">Edit</a> |
-                                <a href="/dashboard/contact/delete">Delete</a>
+                                <a href={"/dashboard/contact/edit/" + contact._id}>Edit</a> |
+                                <a href={"/dashboard/contact/delete" + contact._id}>Delete</a>
                             </td>
                         </tr>
                     ))}
