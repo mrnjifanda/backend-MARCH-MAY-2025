@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>All articles</h2>
+
+    <ul>
+        {% for article in articles %}
+            <li>
+                <a href="{{ url_for('main.view', id=article.id) }}">
+                    {{ article.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('admin.list') }}">ADMIN</a>
+{% endblock %}
