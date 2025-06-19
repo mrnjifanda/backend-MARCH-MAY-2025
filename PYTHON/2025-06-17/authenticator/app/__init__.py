@@ -10,7 +10,19 @@ login_manager = LoginManager()
 bcrypt = Bcrypt()
 
 def create_default_admin():
-    pass
+
+    from app.models.User import User
+
+    admin = User.query.filter_by(email='admin@example.com').first()
+    if not admin:
+        admin = User(
+            username='admin',
+            email='admin@example.com',
+            is_admin=True
+        )
+        admin.set_password('admin123')
+        db.session.add(admin)
+        db.session.commit()
 
 def create_app(config_class=Config):
 
@@ -25,11 +37,17 @@ def create_app(config_class=Config):
     login_manager.login_message = 'Please log in to access this page.'
     login_manager.login_message_category = 'info'
 
-    # Import all blueprints here
+    from app.views.auth import auth_bp
+    from app.views.main import main_bp
+    from app.views.admin import admin_bp
+    
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(main_bp)
+    app.register_blueprint(admin_bp)
 
     with app.app_context():
         db.create_all()
-        # create_default_admin()
+        create_default_admin()
 
     return app
 
